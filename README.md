@@ -1,7 +1,7 @@
 # Vampfire
 
 Vampfire is a self-hosted, privacy-first, lightweight alternative to Discord built
-on top of Vampfire. It provides:
+on top of Campfire. It provides:
 
 - Real-time text chat with multiple rooms and access controls
 - Voice communication (via LiveKit)
