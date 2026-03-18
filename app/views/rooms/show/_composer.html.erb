@@ -1,6 +1,7 @@
 <% content_for :footer do %>
   <div class="composer flex align-end gap position-relative"
-      data-controller="typing-notifications" data-typing-notifications-active-class="typing-indicator--active">
+      data-controller="typing-notifications voice-note" data-typing-notifications-active-class="typing-indicator--active"
+      data-voice-note-room-id-value="<%= room.id %>">
     <%= link_to searches_path, class: "btn flex-item-no-shrink margin-block-end composer__context-btn", style: "view-transition-name: input-switcher" do %>
       <%= image_tag "search.svg", size: 20, aria: { hidden: "true" } %>
       <span class="for-screen-reader">Search</span>
@@ -29,6 +30,16 @@
                           permitted_attachment_types: "application/vnd.actiontext.opengraph-embed",
                           composer_target: "text" } %>
                 </div>
+
+                <button class="btn btn--borderless txt-small flex-item-no-shrink voice-note-btn"
+                        type="button"
+                        data-voice-note-target="recordBtn"
+                        data-action="voice-note#toggleRecord"
+                        title="Record voice note">
+                  🎤
+                  <span class="for-screen-reader">Record voice note</span>
+                </button>
+                <span class="voice-note-status txt-small" data-voice-note-target="status"></span>
 
                 <label class="btn btn--borderless txt-small flex-item-no-shrink composer__attachment-btn input--file">
                   <%= image_tag "attachment.svg", size: 22, class: "colorize--black", aria: { hidden: "true" } %>

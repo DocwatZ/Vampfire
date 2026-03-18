@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   has_many :sessions, dependent: :destroy
   has_many :bans, dependent: :destroy
+  has_many :voice_notes, dependent: :destroy
 
   enum :status, %i[ active deactivated banned ], default: :active
 

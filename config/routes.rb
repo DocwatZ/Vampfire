@@ -73,6 +73,12 @@ Rails.application.routes.draw do
     get "@:message_id", to: "rooms#show", as: :at_message
   end
 
+  # LiveKit token endpoint
+  get "livekit/token", to: "livekit#token"
+
+  # Voice notes
+  resources :voice_notes, only: %i[ create show ]
+
   namespace :rooms do
     resources :opens
     resources :closeds

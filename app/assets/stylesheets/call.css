@@ -1,0 +1,169 @@
+/* Call panel - collapsible container for voice/video */
+.call-panel {
+  display: none;
+  flex-direction: column;
+  background: oklch(var(--lch-gray));
+  border-bottom: 1px solid oklch(var(--lch-gray-dark));
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.call-panel--active {
+  display: flex;
+  max-height: 50vh;
+  min-height: 80px;
+}
+
+/* Call controls bar */
+.call-controls {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: oklch(var(--lch-gray-dark));
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.call-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  background: oklch(var(--lch-gray));
+  border: 1px solid oklch(var(--lch-gray-darker));
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.call-control:hover {
+  background: oklch(var(--lch-gray-dark));
+}
+
+.call-control--muted {
+  background: oklch(var(--lch-red) / 0.15);
+  border-color: oklch(var(--lch-red) / 0.4);
+}
+
+.call-control--active {
+  background: oklch(var(--lch-green) / 0.15);
+  border-color: oklch(var(--lch-green) / 0.4);
+}
+
+.call-control__label {
+  font-size: 0.8rem;
+}
+
+/* Video grid */
+.call-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+  padding: 0.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.call-tile {
+  position: relative;
+  background: oklch(var(--lch-gray-dark));
+  border-radius: 0.5rem;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.call-tile--local {
+  border: 2px solid oklch(var(--lch-blue));
+}
+
+.call-tile__video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.call-tile__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.call-tile--local .call-tile__media {
+  transform: scaleX(-1);
+}
+
+.call-tile__name {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.5rem;
+  color: white;
+  font-size: 0.75rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+/* Join/Leave call buttons in nav */
+.call-join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.call-leave-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  background: oklch(var(--lch-red) / 0.15);
+}
+
+.call-participant-count {
+  font-size: 0.75rem;
+  background: oklch(var(--lch-blue));
+  color: white;
+  border-radius: 50%;
+  min-width: 1.4em;
+  height: 1.4em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.call-participant-count:empty {
+  display: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .call-panel--active {
+    max-height: 40vh;
+  }
+
+  .call-video-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  .call-controls {
+    padding: 0.35rem 0.5rem;
+  }
+
+  .call-control {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+  }
+
+  .call-join-btn__label {
+    display: none;
+  }
+}

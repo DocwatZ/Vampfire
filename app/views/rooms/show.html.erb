@@ -5,9 +5,27 @@
   <meta name="current-room-id" content="<%= @room.id %>">
 <% end %>
 
+<div data-controller="call" data-call-room-id-value="<%= @room.id %>">
+
 <%= render "rooms/show/nav", room: @room %>
 
 <% content_for :sidebar, sidebar_turbo_frame_tag(src: user_sidebar_path) %>
+
+<%# Call panel - shown when in a call %>
+<div class="call-panel" data-call-target="panel">
+  <div class="call-controls" data-call-target="controls" style="display:none">
+    <button class="btn call-control" data-call-target="micBtn" data-action="call#toggleMic" title="Mute microphone">
+      🎤 <span class="call-control__label">Mute</span>
+    </button>
+    <button class="btn call-control" data-call-target="camBtn" data-action="call#toggleCam" title="Turn on camera">
+      📹 <span class="call-control__label">Cam On</span>
+    </button>
+    <button class="btn call-control" data-call-target="screenBtn" data-action="call#toggleScreen" title="Share screen">
+      🖥️ <span class="call-control__label">Share</span>
+    </button>
+  </div>
+  <div class="call-video-grid" data-call-target="videoGrid"></div>
+</div>
 
 <%= message_area_tag(@room) do %>
   <%= render "messages/template" %>
@@ -22,3 +40,5 @@
 <% end %>
 
 <%= render "rooms/show/composer", room: @room %>
+
+</div>

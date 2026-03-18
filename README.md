@@ -1,9 +1,13 @@
-# Campfire
+# Vampfire
 
-Campfire is a web-based chat application. It supports many of the features you'd
-expect, including:
+Vampfire is a self-hosted, privacy-first, lightweight alternative to Discord built
+on top of Campfire. It provides:
 
-- Multiple rooms, with access controls
+- Real-time text chat with multiple rooms and access controls
+- Voice communication (via LiveKit)
+- Video calls (via LiveKit)
+- Screen sharing (via LiveKit)
+- Voice notes (record and send audio messages)
 - Direct messages
 - File attachments with previews
 - Search
@@ -11,37 +15,47 @@ expect, including:
 - @mentions
 - API, with support for bot integrations
 
-## Deploying with Docker
+- Mobile-friendly PWA experience
+- Easy deployment via Docker and Unraid
 
-Campfire's Docker image contains everything needed for a fully-functional,
-single-machine deployment. This includes the web app, background jobs, caching,
-file serving, and SSL.
+## Deploying with Docker Compose
 
-To persist storage of the database and file attachments, map a volume to `/rails/storage`.
+Vampfire provides a complete Docker Compose stack including the Rails app, Redis, and LiveKit server.
 
-To configure additional features, you can set the following environment variables:
+### Quick Start
 
-- `SSL_DOMAIN` - enable automatic SSL via Let's Encrypt for the given domain name
-- `DISABLE_SSL` - alternatively, set `DISABLE_SSL` to serve over plain HTTP
-- `VAPID_PUBLIC_KEY`/`VAPID_PRIVATE_KEY` - set these to a valid keypair to
-  allow sending Web Push notifications. You can generate a new keypair by running
-  `/script/admin/create-vapid-key`
-- `SENTRY_DSN` - to enable error reporting to sentry in production, supply your
-  DSN here
+```bash
+docker compose up -d
+```
 
-For example:
+### Environment Variables
 
-    docker build -t campfire .
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `SECRET_KEY_BASE` | Rails secret key (required) | - |
+| `LIVEKIT_URL` | LiveKit server WebSocket URL | `ws://livekit:7880` |
+| `LIVEKIT_API_KEY` | LiveKit API key | `devkey` |
+| `LIVEKIT_SECRET` | LiveKit API secret | `secret` |
+| `REDIS_URL` | Redis connection URL | `redis://redis:6379` |
+| `DISABLE_SSL` | Set to serve over plain HTTP | `true` |
+| `VAPID_PUBLIC_KEY` | Web Push notification public key | - |
+| `VAPID_PRIVATE_KEY` | Web Push notification private key | - |
+
+### Unraid Deployment
+
+For Unraid, use volume mappings like `/mnt/user/appdata/vampfire/storage:/rails/storage`.
+
+### Building from Source
+
+    docker build -t vampfire .
 
     docker run \
       --publish 80:80 --publish 443:443 \
       --restart unless-stopped \
-      --volume campfire:/rails/storage \
+      --volume vampfire:/rails/storage \
       --env SECRET_KEY_BASE=$YOUR_SECRET_KEY_BASE \
-      --env VAPID_PUBLIC_KEY=$YOUR_PUBLIC_KEY \
-      --env VAPID_PRIVATE_KEY=$YOUR_PRIVATE_KEY \
-      --env TLS_DOMAIN=chat.example.com \
-      campfire
+      --env DISABLE_SSL=true \
+      vampfire
 
 ## Running in development
 
@@ -50,12 +64,12 @@ For example:
 
 ## Worth Noting
 
-When you start Campfire for the first time, you’ll be guided through
+When you start Vampfire for the first time, you’ll be guided through
 creating an admin account.
 The email address of this admin account will be shown on the login page
 so that people who forget their password know who to contact for help.
 (You can change this email later in the settings)
 
-Campfire is single-tenant: any rooms designated "public" will be accessible by
+Vampfire is single-tenant: any rooms designated "public" will be accessible by
 all users in the system. To support entirely distinct groups of customers, you
 would deploy multiple instances of the application.
