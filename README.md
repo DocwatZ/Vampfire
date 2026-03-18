@@ -62,6 +62,23 @@ on top of Campfire. It provides:
 
 ---
 
+## Screenshots
+
+<table align="center">
+  <tr>
+    <td align="center"><img src="app/assets/images/screenshots/android-sidebar.png" alt="Sidebar — room list and navigation" width="250" /></td>
+    <td align="center"><img src="app/assets/images/screenshots/android-chat.png" alt="Chat — real-time messaging with quotes, mentions and reactions" width="250" /></td>
+    <td align="center"><img src="app/assets/images/screenshots/android-dark-mode.png" alt="Dark Mode — full dark-theme support" width="250" /></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Sidebar &amp; Navigation</em></td>
+    <td align="center"><em>Real-time Chat</em></td>
+    <td align="center"><em>Dark Mode</em></td>
+  </tr>
+</table>
+
+---
+
 ## Quick Start (5-Minute Setup)
 
 ```bash
