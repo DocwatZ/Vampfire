@@ -96,7 +96,11 @@ Vampfire can be deployed on Unraid using either the Community Applications templ
    - **SECRET_KEY_BASE**: Generate one with `openssl rand -hex 64` and paste it in
    - **LIVEKIT_URL**: Leave as default (`ws://livekit:7880`) if running LiveKit on the same server
    - **LIVEKIT_API_KEY** / **LIVEKIT_SECRET**: Set matching values on both Vampfire and your LiveKit container
-   - **VAPID keys**: Generate with `docker run --rm ghcr.io/docwatz/vampfire:latest bin/rails runner "keys = WebPush.generate_key; puts keys.public_key; puts keys.private_key"` for Web Push notifications
+   - **VAPID keys** *(optional, for Web Push notifications)*: Generate with:
+     ```bash
+     docker run --rm ghcr.io/docwatz/vampfire:latest \
+       bin/rails runner "keys = WebPush.generate_key; puts keys.public_key; puts keys.private_key"
+     ```
 5. Click **Apply** to start the container
 
 #### Manual Docker Setup on Unraid
@@ -116,7 +120,7 @@ Vampfire can be deployed on Unraid using either the Community Applications templ
      - `LIVEKIT_URL` = `ws://<your-livekit-ip>:7880`
      - `LIVEKIT_API_KEY` = *(your LiveKit API key)*
      - `LIVEKIT_SECRET` = *(your LiveKit secret)*
-     - `DISABLE_SSL` = `true` *(set to `false` if using a reverse proxy with SSL)*
+     - `DISABLE_SSL` = `true` *(keep as `true` when behind a reverse proxy handling SSL)*
      - `VAPID_PUBLIC_KEY` = *(optional, for Web Push)*
      - `VAPID_PRIVATE_KEY` = *(optional, for Web Push)*
 
