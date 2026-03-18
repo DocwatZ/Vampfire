@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Vampfire</Name>
+  <Repository>ghcr.io/docwatz/vampfire:latest</Repository>
+  <Registry>https://ghcr.io/docwatz/vampfire</Registry>
+  <Branch>
+    <Tag>latest</Tag>
+    <TagDescription>Latest stable release</TagDescription>
+  </Branch>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/DocwatZ/Vampfire/issues</Support>
+  <Project>https://github.com/DocwatZ/Vampfire</Project>
+  <Overview>
+    Vampfire is a self-hosted, privacy-first, lightweight alternative to Discord built on top of Campfire.
+    Features include real-time text chat, voice/video calls via LiveKit, screen sharing, voice notes,
+    direct messages, file attachments, search, Web Push notifications, @mentions, and bot integrations.
+    Requires Redis and LiveKit containers to be running.
+  </Overview>
+  <Category>Productivity: Network:Other</Category>
+  <WebUI>http://[IP]:[PORT:80]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/DocwatZ/Vampfire/main/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/DocwatZ/Vampfire/main/public/icon.png</Icon>
+  <ExtraParams>--restart unless-stopped</ExtraParams>
+  <Description>
+    Vampfire is a self-hosted, privacy-first, lightweight alternative to Discord built on top of Campfire.
+    Features include real-time text chat, voice/video calls via LiveKit, screen sharing, voice notes,
+    direct messages, file attachments, search, Web Push notifications, @mentions, and bot integrations.
+    Requires Redis and LiveKit containers to be running.
+  </Description>
+  <Config Name="HTTP Port" Target="80" Default="80" Mode="tcp" Description="HTTP port for web interface" Type="Port" Display="always" Required="true" Mask="false">80</Config>
+  <Config Name="HTTPS Port" Target="443" Default="443" Mode="tcp" Description="HTTPS port for web interface" Type="Port" Display="always" Required="false" Mask="false">443</Config>
+  <Config Name="Storage" Target="/rails/storage" Default="/mnt/user/appdata/vampfire/storage" Mode="rw" Description="Persistent storage for database, uploads, and configuration" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/vampfire/storage</Config>
+  <Config Name="SECRET_KEY_BASE" Target="SECRET_KEY_BASE" Default="" Mode="" Description="Rails secret key base. Generate with: openssl rand -hex 64" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="REDIS_URL" Target="REDIS_URL" Default="redis://redis:6379" Mode="" Description="Redis connection URL. Point to your Redis container." Type="Variable" Display="always" Required="true" Mask="false">redis://redis:6379</Config>
+  <Config Name="LIVEKIT_URL" Target="LIVEKIT_URL" Default="ws://livekit:7880" Mode="" Description="LiveKit server WebSocket URL. Point to your LiveKit container." Type="Variable" Display="always" Required="true" Mask="false">ws://livekit:7880</Config>
+  <Config Name="LIVEKIT_API_KEY" Target="LIVEKIT_API_KEY" Default="devkey" Mode="" Description="LiveKit API key. Must match the key configured in your LiveKit container." Type="Variable" Display="always" Required="true" Mask="false">devkey</Config>
+  <Config Name="LIVEKIT_SECRET" Target="LIVEKIT_SECRET" Default="secret" Mode="" Description="LiveKit API secret. Must match the secret configured in your LiveKit container." Type="Variable" Display="always" Required="true" Mask="true">secret</Config>
+  <Config Name="DISABLE_SSL" Target="DISABLE_SSL" Default="true" Mode="" Description="Set to true to serve over plain HTTP. Use true if behind a reverse proxy handling SSL." Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="VAPID_PUBLIC_KEY" Target="VAPID_PUBLIC_KEY" Default="" Mode="" Description="VAPID public key for Web Push notifications. Optional." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="VAPID_PRIVATE_KEY" Target="VAPID_PRIVATE_KEY" Default="" Mode="" Description="VAPID private key for Web Push notifications. Optional." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+</Container>
