@@ -7,6 +7,8 @@ services:
     environment:
       - SECRET_KEY_BASE=${SECRET_KEY_BASE:-$(openssl rand -hex 64)}
       - REDIS_URL=redis://redis:6379
+      # LIVEKIT_URL must be reachable by the end-user's browser, not just Docker.
+      # Use wss:// when behind a reverse proxy with SSL.
       - LIVEKIT_URL=${LIVEKIT_URL:-ws://livekit:7880}
       - LIVEKIT_API_KEY=${LIVEKIT_API_KEY:-devkey}
       - LIVEKIT_SECRET=${LIVEKIT_SECRET:-secret}
@@ -16,14 +18,27 @@ services:
     volumes:
       - vampfire_storage:/rails/storage
     depends_on:
-      - redis
-      - livekit
+      redis:
+        condition: service_healthy
+      livekit:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
     restart: unless-stopped
 
   redis:
     image: redis:7-alpine
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
     restart: unless-stopped
 
   livekit:
@@ -32,9 +47,14 @@ services:
       - "7880:7880"
       - "7881:7881"
       - "50000-50060:50000-50060/udp"
-    environment:
-      - LIVEKIT_KEYS_devkey=secret
-    command: --dev --bind 0.0.0.0
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    command: --config /etc/livekit.yaml --bind 0.0.0.0
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:7880"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
     restart: unless-stopped
 
 volumes:

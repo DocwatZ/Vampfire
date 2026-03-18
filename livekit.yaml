@@ -1,0 +1,53 @@
+# LiveKit Server Configuration for Vampfire
+# This file is mounted into the LiveKit container via docker-compose.
+#
+# For full documentation, see: https://docs.livekit.io/realtime/self-hosting/deployment/
+
+port: 7880
+rtc:
+  # Use the server's external IP for WebRTC connections.
+  # Required when running behind NAT or in Docker.
+  use_external_ip: true
+
+  # UDP port range for WebRTC media traffic.
+  # These ports must be exposed in docker-compose and open in your firewall.
+  port_range_start: 50000
+  port_range_end: 50060
+
+  # TCP fallback port for WebRTC (used when UDP is blocked).
+  tcp_port: 7881
+
+# API keys — must match LIVEKIT_API_KEY and LIVEKIT_SECRET in your .env file.
+# Override these with your own strong credentials in production.
+keys:
+  devkey: secret
+
+# TURN server configuration for NAT traversal.
+# Required for reliable connectivity across NATs, firewalls, and mobile networks.
+#
+# Uncomment and configure ONE of the following options:
+#
+# --- Option A: External TURN server (recommended if you already have Coturn) ---
+#
+# turn:
+#   enabled: true
+#   domain: turn.example.com
+#   tls_port: 443
+#   udp_port: 3478
+#   external_tls:
+#     - address: turn.example.com
+#       port: 443
+#       protocol: tls
+#       username: your-turn-username
+#       credential: your-turn-password
+#
+# --- Option B: LiveKit built-in TURN (simpler, uses LiveKit's own TLS port) ---
+#
+# turn:
+#   enabled: true
+#   domain: your-domain.com
+#   tls_port: 5349
+#   udp_port: 3478
+
+logging:
+  level: info

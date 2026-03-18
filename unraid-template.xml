@@ -38,6 +38,10 @@
   <Config Name="LIVEKIT_API_KEY" Target="LIVEKIT_API_KEY" Default="devkey" Mode="" Description="LiveKit API key. Must match the key configured in your LiveKit container." Type="Variable" Display="always" Required="true" Mask="false">devkey</Config>
   <Config Name="LIVEKIT_SECRET" Target="LIVEKIT_SECRET" Default="secret" Mode="" Description="LiveKit API secret. Must match the secret configured in your LiveKit container." Type="Variable" Display="always" Required="true" Mask="true">secret</Config>
   <Config Name="DISABLE_SSL" Target="DISABLE_SSL" Default="true" Mode="" Description="Set to true to serve over plain HTTP. Use true if behind a reverse proxy handling SSL." Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="TURN_HOST" Target="TURN_HOST" Default="" Mode="" Description="TURN server hostname for NAT traversal. Required for reliable voice/video on mobile networks. Example: turn.yourdomain.com" Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="TURN_PORT" Target="TURN_PORT" Default="3478" Mode="" Description="TURN server port. Default is 3478." Type="Variable" Display="advanced" Required="false" Mask="false">3478</Config>
+  <Config Name="TURN_USERNAME" Target="TURN_USERNAME" Default="" Mode="" Description="TURN server username for authentication." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="TURN_PASSWORD" Target="TURN_PASSWORD" Default="" Mode="" Description="TURN server password for authentication." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="VAPID_PUBLIC_KEY" Target="VAPID_PUBLIC_KEY" Default="" Mode="" Description="VAPID public key for Web Push notifications. Optional." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="VAPID_PRIVATE_KEY" Target="VAPID_PRIVATE_KEY" Default="" Mode="" Description="VAPID private key for Web Push notifications. Optional." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
 </Container>
