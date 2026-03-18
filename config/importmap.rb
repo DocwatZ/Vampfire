@@ -9,6 +9,9 @@ pin "trix", to: "trix.esm.min.js" # @2.0.10
 pin "@rails/actiontext", to: "actiontext.js"
 pin "highlight.js", to: "highlight.js/core.js"
 
+# LiveKit client for voice/video calls
+pin "livekit-client", to: "https://cdn.jsdelivr.net/npm/livekit-client@2.9.1/dist/livekit-client.esm.mjs"
+
 pin_all_from "app/javascript/initializers", under: "initializers"
 pin_all_from "app/javascript/lib", under: "lib"
 pin_all_from "app/javascript/channels", under: "channels"

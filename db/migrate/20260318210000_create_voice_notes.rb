@@ -1,0 +1,9 @@
+class CreateVoiceNotes < ActiveRecord::Migration[8.2]
+  def change
+    create_table :voice_notes do |t|
+      t.references :user, null: false, foreign_key: true
+      t.references :room, null: false, foreign_key: true
+      t.timestamps
+    end
+  end
+end

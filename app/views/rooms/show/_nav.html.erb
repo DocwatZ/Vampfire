@@ -11,6 +11,18 @@
     </h1>
   <% end %>
 
+  <button class="btn call-join-btn" title="Join Call"
+          data-call-target="joinBtn"
+          data-action="call#joinCall">
+    📞 <span class="call-join-btn__label">Join Call</span>
+  </button>
+  <button class="btn call-leave-btn" title="Leave Call" style="display:none"
+          data-call-target="leaveBtn"
+          data-action="call#leaveCall">
+    📴 <span>Leave</span>
+    <span class="call-participant-count" data-call-target="participantCount"></span>
+  </button>
+
   <%= link_to_edit_room(room) do %>
     <%= image_tag "menu-dots-horizontal.svg", size: 20, aria: { hidden: "true" } %>
     <span class="for-screen-reader">Settings for this <%= room.direct? ? "Ping" : "room" %></span>

@@ -1,0 +1,42 @@
+services:
+  vampfire:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE:-$(openssl rand -hex 64)}
+      - REDIS_URL=redis://redis:6379
+      - LIVEKIT_URL=${LIVEKIT_URL:-ws://livekit:7880}
+      - LIVEKIT_API_KEY=${LIVEKIT_API_KEY:-devkey}
+      - LIVEKIT_SECRET=${LIVEKIT_SECRET:-secret}
+      - DISABLE_SSL=${DISABLE_SSL:-true}
+      - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY:-}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY:-}
+    volumes:
+      - vampfire_storage:/rails/storage
+    depends_on:
+      - redis
+      - livekit
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  livekit:
+    image: livekit/livekit-server:latest
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "50000-50060:50000-50060/udp"
+    environment:
+      - LIVEKIT_KEYS_devkey=secret
+    command: --dev --bind 0.0.0.0
+    restart: unless-stopped
+
+volumes:
+  vampfire_storage:
+  redis_data:

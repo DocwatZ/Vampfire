@@ -1,0 +1,60 @@
+/* Voice note recording button */
+.voice-note-btn {
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.voice-note-btn:hover {
+  background: oklch(var(--lch-gray));
+}
+
+.voice-note--recording {
+  animation: voice-note-pulse 1s infinite;
+  background: oklch(var(--lch-red) / 0.15);
+}
+
+@keyframes voice-note-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.voice-note-status {
+  color: oklch(var(--lch-red));
+  white-space: nowrap;
+}
+
+/* Voice note player in messages */
+.voice-note-message {
+  margin: 0.25rem 0;
+}
+
+.voice-note-player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: oklch(var(--lch-gray));
+  border-radius: 1rem;
+  max-width: 400px;
+}
+
+.voice-note-player__icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.voice-note-player__audio {
+  flex: 1;
+  height: 32px;
+  min-width: 0;
+}
+
+/* Style the audio controls for dark mode */
+@media (prefers-color-scheme: dark) {
+  .voice-note-player__audio {
+    filter: invert(1);
+  }
+}
