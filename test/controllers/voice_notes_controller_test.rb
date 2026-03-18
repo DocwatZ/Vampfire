@@ -7,7 +7,7 @@ class VoiceNotesControllerTest < ActionDispatch::IntegrationTest
 
   test "create voice note with audio attachment" do
     room = rooms(:pets)
-    audio_blob = fixture_file_upload("moon.jpg", "audio/webm")
+    audio_blob = fixture_file_upload("test_audio.webm", "audio/webm")
 
     assert_difference -> { VoiceNote.count }, 1 do
       post voice_notes_url, params: {
