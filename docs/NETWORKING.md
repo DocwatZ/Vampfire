@@ -288,7 +288,7 @@ restrictions. Screen sharing is not supported on iOS.
 
 **Fix:**
 1. Set up a TURN server (see above)
-2. Verify TURN is reachable: `curl -v telnet://turn.yourdomain.com:3478`
+2. Verify TURN is reachable: `nc -zv turn.yourdomain.com 3478`
 3. Check LiveKit logs: `docker compose logs livekit`
 
 ### "Call connects but no sound"
