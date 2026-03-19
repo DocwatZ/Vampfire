@@ -1,4 +1,4 @@
-# Vampfire
+# <img src="https://github.com/user-attachments/assets/3a3b9abc-5e89-4aee-a3e0-a3c66bfbdcf9" width="48" height="48" alt="Vampfire logo" style="vertical-align: middle;"> Vampfire
 
 ```
                                               ###                                                   
