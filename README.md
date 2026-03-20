@@ -62,6 +62,26 @@ on top of Campfire. It provides:
 
 ---
 
+## Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Framework** | [Ruby on Rails](https://rubyonrails.org/) 8.2 (Ruby 3.4) |
+| **Database** | [SQLite](https://www.sqlite.org/) — zero-config, file-based storage |
+| **Real-time** | [Action Cable](https://guides.rubyonrails.org/action_cable_overview.html) (WebSockets) backed by [Redis](https://redis.io/) |
+| **Voice / Video** | [LiveKit](https://livekit.io/) (WebRTC) with [livekit-client](https://www.npmjs.com/package/livekit-client) JS SDK |
+| **Frontend** | [Hotwire](https://hotwired.dev/) ([Turbo](https://turbo.hotwired.dev/) + [Stimulus](https://stimulus.hotwired.dev/)), [Trix](https://trix-editor.org/) rich-text editor, [importmap-rails](https://github.com/rails/importmap-rails) (no bundler) |
+| **Asset Pipeline** | [Propshaft](https://github.com/rails/propshaft) |
+| **Web Server** | [Puma](https://puma.io/) behind [Thruster](https://github.com/basecamp/thruster) (HTTP/2, asset caching, X-Sendfile) |
+| **Background Jobs** | [Resque](https://github.com/resque/resque) + Redis |
+| **Push Notifications** | Web Push via the [web-push](https://github.com/pushpad/web-push) gem (VAPID) |
+| **Media Processing** | [libvips](https://www.libvips.org/) (via ImageProcessing) and [FFmpeg](https://ffmpeg.org/) |
+| **Containerization** | [Docker](https://www.docker.com/) multi-stage build, [Docker Compose](https://docs.docker.com/compose/) orchestration |
+| **Container Image** | Published to [GitHub Container Registry](https://ghcr.io/) (`ghcr.io/docwatz/vampfire`) |
+| **Supported Platforms** | Docker, [Unraid](https://unraid.net/) (community template), any Linux host |
+
+---
+
 ## Quick Start (5-Minute Setup)
 
 ```bash
